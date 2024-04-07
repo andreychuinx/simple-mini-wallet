@@ -1,9 +1,23 @@
+const { validationResult } = require("express-validator");
 const { wallets } = require("../models");
+const { initService } = require("../services/wallets");
 
 const initWallet = async (req, res) => {
-  res.status(200).send({
-    status: "success",
-    data: "ok",
+  const errors = validationResult(req);
+  if (errors.isEmpty()) {
+    const token = await initService(req.body);
+    return res.status(200).send({
+      status: "success",
+      data: {
+        token,
+      },
+    });
+  }
+  res.status(400).send({
+    status: "fail",
+    data: {
+      error: errors.array()[0].msg.message,
+    },
   });
 };
 
@@ -14,7 +28,6 @@ const enableWallet = async (req, res) => {
   });
 };
 const getWalletBalance = async (req, res) => {
-  const query = await wallets.findAll()
   res.status(200).send({
     status: "success",
     data: "ok",

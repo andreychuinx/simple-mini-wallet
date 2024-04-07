@@ -9,9 +9,10 @@ const {
   withdrawalsWallet,
   disableWallet,
 } = require("../controllers/wallet");
+const { initValidator } = require('../validator/wallets')
 
 /* GET users listing. */
-Router.post("/init", initWallet);
+Router.post("/init", initValidator, initWallet);
 Router.post("/wallet", enableWallet);
 Router.get("/wallet", getWalletBalance);
 Router.get("/wallet/transactions", getWalletTransactions);
