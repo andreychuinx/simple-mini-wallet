@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: 'postgres:10.7'
+    environment:
+      - POSTGRES_USER=dev
+      - POSTGRES_PASSWORD=dev
+      - POSTGRES_DB=wallet_dev
+    ports:
+      - 54322:5432
+    volumes:
+      - ./data:/var/lib/postgresql/data
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    container_name: 'mini-wallet'
+    ports:
+      - 3000:3000
+    env_file:
+      - ./.env
+    volumes:
+      - ./:/app
+      - /app/node_modules
