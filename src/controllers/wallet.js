@@ -1,3 +1,5 @@
+const { wallets } = require("../models");
+
 const initWallet = async (req, res) => {
   res.status(200).send({
     status: "success",
@@ -12,6 +14,7 @@ const enableWallet = async (req, res) => {
   });
 };
 const getWalletBalance = async (req, res) => {
+  const query = await wallets.findAll()
   res.status(200).send({
     status: "success",
     data: "ok",
