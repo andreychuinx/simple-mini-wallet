@@ -18,18 +18,28 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       primaryKey: true,
       type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4
+    },
+    deposited_by: {
+      type: DataTypes.UUID
+    },
+    deposited_at: {
+      type: DataTypes.DATE
+    },
+    withdrawn_by: {
+      type: DataTypes.UUID
+    },
+    withdrawn_at: {
+      type: DataTypes.DATE
     },
     status: {
       type: DataTypes.ENUM('success', 'failed')
-    },
-    transaction_at: {
-      type: DataTypes.DATE
     },
     type: {
       type: DataTypes.ENUM('deposit', 'withdrawal')
     },
     amount: {
-      type: DataTypes.INTEGER
+      type: DataTypes.DECIMAL
     },
     reference_id: {
       type: DataTypes.UUID,
