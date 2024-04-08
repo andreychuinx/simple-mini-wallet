@@ -9,6 +9,5 @@ module.exports = {
   DB_PORT: Env.get('DB_PORT').required().asPortNumber(),
   APP_PORT: Env.get('APP_PORT').required().asPortNumber(),
   ACCESS_TOKEN_PRIVATE_KEY: Env.get('ACCESS_TOKEN_PRIVATE_KEY').required().asString(),
-  ACCESS_TOKEN_PUBLIC_KEY: Env.get('ACCESS_TOKEN_PUBLIC_KEY').required().asString(),
   JWT_ALGORITHM: Env.get('JWT_ALGORITHM').required().asString(),
 }

@@ -11,12 +11,15 @@ services:
       - 54322:5432
     volumes:
       - ./data:/var/lib/postgresql/data
+
   web:
     build:
       context: .
       dockerfile: Dockerfile
     depends_on:
-      - postgres
+      postgres:
+        condition: service_started
+    restart: "no"
     container_name: 'mini-wallet'
     ports:
       - 3000:3000
@@ -25,3 +28,4 @@ services:
     volumes:
       - ./:/app
       - /app/node_modules
+    entrypoint: bash -c "npm run migrate && npm start"
